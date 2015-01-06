@@ -1,4 +1,3 @@
-fastkde
-=======
 
-webgl based kernel density estimation
+fast in browser density map generation
+
