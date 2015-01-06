@@ -1,0 +1,14 @@
+.git/
+source/node_modules/*
+source/vendor/*
+*.sublime-project
+*.sublime-workspace
+rawdata/
+
+!source/vendor/d3/d3.min.js
+!source/vendor/jquery/dist/jquery.js
+!source/vendor/foundation/js/foundation.js
+!source/vendor/threejs/build/three.js
+!source/vendor/underscore/underscore.js
+!source/vendor/threejs/lib/stats.min.js
+

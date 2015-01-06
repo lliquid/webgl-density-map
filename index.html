@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>kde</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="source/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">        
+        <link rel="stylesheet" href="source/vendor/buttons/css/buttons.css">
+        <link rel="stylesheet" href="source/vendor/highlight/styles/github.css">
+        <link rel="stylesheet" type="text/css" href="source/css/style.css">        
+        <script src="source/vendor/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="source/vendor/buttons/js/buttons.js"></script>        
+        <script type="text/javascript" src="source/vendor/d3/d3.min.js"></script>
+        <script src="source/vendor/threejs/build/three.js"></script>
+        <script src="source/vendor/underscore/underscore.js"></script>
+        <script type="text/javascript" src="source/build/app.build.js"></script>
+        <script src="source/vendor/highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body> 
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4 pull-left">
+                    <h2>Kernel Density Estimation</h2>                        
+                </div>
+                <div class="col-md-8">
+                </div>                    
+                
+                    <!-- <a href="https://github.com/lliquid/blocks" class="button button-rounded button-flat">View Source On <strong>GitHub</strong></a> -->
+                <!-- <a href="http://panpanxu.org"> by <strong>Panpan</strong></a> -->
+<!--                 <a href="https://github.com/lliquid/blocks/zipball/master" class="button button-rounded button-flat">DownLoad <strong> ZIP File</strong></a> 
+                <a href="https://github.com/lliquid/blocks/tarball/master" class="button button-rounded button-flat">Download <strong>TAR Ball</strong></a>  -->
+                
+            </div>        
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="display0">
+                        <canvas style="border-color: #dfdfdf; border-width: 1px; border-style: solid;">
+                        </canvas>                        
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Settings</div>
+                      <div class="panel-body">
+                        <div class="input-group">
+                            <label for="bandwidth">Bandwidth <strong class="value"></strong></label>
+                            <input class="inline" id="bandwidth" style="width: 200px" type="range" min="0" max="100" value="50">  
+                            <label for="attentuation">Attenuation <strong class="value"></strong></label>
+                            <input class="inline" id="attentuation" style="width: 200px" type="range" min="0" max="100" value="50">                            
+                        </div>
+                      </div>
+                    </div>
+<!--                     <div class="panel panel-default">
+                      <div class="panel-heading">Info</div>
+                      <div class="panel-body">
+                      </div>
+                    </div>    
+ -->
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="alert alert-warning" role="alert">Data take a while to load in the demo.</div>
+                    <h4> The implementation utilize gpu through webgl to perform fast in browser kernel density estimation. It is scalable to render up to ~1,000, 000 points in interactive rate. <a href="https://github.com/lliquid/blocks" class="button button-rounded button-flat">View Source On <strong>GitHub</strong></a></h4>
+                    
+                    <h4>Usage:</h4>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h5>Required libs: <a href="http://threejs.org/"><strong>Three.js</strong></a>, <a  href="source/build/fastkde.js"><strong>fasekde.js</strong></h5></a>
+                        <h5>Initialize display</h5>
+                        <pre><code>var config = {
+    width: 512, 
+    height: 512,
+    bandwidth: 6, //in pixels
+    k: 4, //control convolution kernel size, not affect bandwidth
+    colors: [{h: (228 / 360), s: 0.3, l: 0.2}, {h: (60 / 360), s: 1.0, l: 0.9}], //scalar color map obtained by interpolating two colors's hsl values
+    attentuation: 0.000003 //scale density
+};
+
+var kde = new KDE(canvasDomElement, config);</code></pre>
+                        <h5>Draw data</h5>
+<pre><code>kde.drawData(data, //2d data array in the form : [[x, y], [x, y] ...]
+{
+    d0: [-60, 40], //data origin
+    sx: 5, //scale factor
+    sy: 8, 
+    x0: 0, //screen space origin
+    y0: 0 
+});</code></pre>                        
+
+                        <h5>Clear display</h5>
+<pre><code>kde.clear();</code></pre>
+                        <h5>Update parameters</h5>
+<pre><code>kde.setKernel(bandwidth, k);
+kde.setAttentuation(attentuation);</code></pre>                        
+                        <h5>Update display with new parameters</h5>
+<pre><code>kde.reDraw();</code></pre>
+                      </div>
+                    </div>
+                    <h4></h4>
+                    <h4>Author: <a href='http://panpanxu.org'>Panpan Xu (徐盼盼) @ HKUST </a></h4>
+                    <h4></h4>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-3"></div>
+
+        </div>
+
+    <script src="source/vendor/bootstrap/dist/js/bootstrap.min.js"></script> 
+    </body>
+</html>
